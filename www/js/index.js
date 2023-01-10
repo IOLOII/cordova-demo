@@ -19,11 +19,20 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false)
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
 
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version)
+    document.getElementById('deviceready').classList.add('ready')
+}
+window.onload = function () {
+    new VConsole
+    console.log(axios)
+    axios("http://express.web-framework-bk89.1676369102958317.cn-shenzhen.fc.devsapp.net/hello2").then((res) => {
+        console.log(res)
+    }).catch((err) => {
+        console.log(err)
+    })
 }
