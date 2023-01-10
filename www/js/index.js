@@ -20,19 +20,126 @@
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false)
-
+var permissions
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version)
     document.getElementById('deviceready').classList.add('ready')
+
+    permissions = cordova.plugins.permissions
+    permissions.hasPermission(permissions.CAMERA, function (status) {
+        if (status.hasPermission) {
+            console.log("Yes :D ")
+        }
+        else {
+            console.warn("No :( ")
+        }
+    })
 }
 window.onload = function () {
-    new VConsole
+    // new VConsole
     console.log(axios)
     axios("http://express.web-framework-bk89.1676369102958317.cn-shenzhen.fc.devsapp.net/hello2").then((res) => {
         console.log(res)
     }).catch((err) => {
         console.log(err)
     })
+
+    var buttonCheckPermission = document.querySelector("#buttonCheckPermission")
+    var buttonRequestPermission = document.querySelector("#buttonRequestPermission")
+    var buttonToCheckAllPermission = document.querySelector("#buttonToCheckAllPermission")
+    var buttonToRequestAllPermission = document.querySelector("#buttonToRequestAllPermission")
+
+    buttonCheckPermission.addEventListener('click', checkPermission)
+    buttonRequestPermission.addEventListener('click', requestPermission)
+    buttonToCheckAllPermission.addEventListener('click', toCheckAllPermission)
+    buttonToRequestAllPermission.addEventListener('click', toRequestAllPermission)
+}
+function checkPermission() {
+    console.log("run checkPermission")
+    if (!permissions) {
+        console.log("permissions init fail")
+        return
+    }
+    permissions = cordova.plugins.permissions
+    permissions.checkPermission(permissions.CAMERA, function (status) {
+        console.log("status:", status)
+        if (status.hasPermission) {
+            console.log("Yes :D ")
+        }
+        else {
+            console.warn("No :( ")
+        }
+    })
+}
+function requestPermission() {
+    console.log("run requestPermission")
+    if (!permissions) {
+        console.log("permissions init fail")
+        return
+    }
+    permissions.requestPermission(permissions.CAMERA, success, error)
+
+    function error() {
+        console.warn('Camera permission is not turned on')
+    }
+
+    function success(status) {
+        console.log("status:", status)
+        if (!status.hasPermission) error()
+    }
+}
+
+function toCheckAllPermission() {
+    console.log("run toCheckAllPermission")
+    if (!permissions) {
+        console.log("permissions init fail")
+        return
+    }
+    var toCheckPermission = [
+        permissions.ACCESS_COARSE_LOCATION,
+        permissions.ACCESS_FINE_LOCATION,
+        permissions.READ_PHONE_STATE,
+        permissions.WRITE_EXTERNAL_STORAGE
+    ]
+    var res = {}
+    toCheckPermission.forEach(per => {
+        permissions.checkPermission(per, function (status) {
+            console.log("status:", status)
+            if (status.hasPermission) {
+                console.log("Yes :D ")
+            }
+            else {
+                console.warn("No :( ")
+            }
+            res[per] = status.hasPermission
+        })
+    })
+    console.log("所有权限校验结果：")
+    console.table(res)
+
+}
+function toRequestAllPermission() {
+    console.log("run toRequestAllPermission")
+    if (!permissions) {
+        console.log("permissions init fail")
+        return
+    }
+    var toCheckPermission = [
+        permissions.ACCESS_COARSE_LOCATION,
+        permissions.ACCESS_FINE_LOCATION,
+        permissions.READ_PHONE_STATE,
+        permissions.WRITE_EXTERNAL_STORAGE
+    ]
+
+    permissions.requestPermissions(toCheckPermission, success, error)
+    function error(error) {
+        console.log(error)
+        console.warn('all permission is not turned on')
+    }
+    function success(status) {
+        console.log("status:", status)
+        if (!status.hasPermission) error()
+    }
 }

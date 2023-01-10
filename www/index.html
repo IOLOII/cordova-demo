@@ -35,7 +35,7 @@
         <meta name="color-scheme" content="light dark">
         <link rel="stylesheet" href="css/index.css">
         <title>Hello World 123</title>
-        <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script>
+        <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script> -->
         <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.2/axios.min.js"></script>
     </head>
     <body>
@@ -46,6 +46,10 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div>
+        <button id='buttonCheckPermission'>检查相机权限</button>
+        <button id='buttonRequestPermission'>权限相机申请</button>
+        <button id='buttonToCheckAllPermission'>校验危险权限</button>
+        <button id='buttonToRequestAllPermission'>申请危险权限</button>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
     </body>
