@@ -20,6 +20,8 @@
 <html>
 
     <head>
+        <script src="cordova.js"></script>
+        <script src="js/initNative.js"></script>
         <meta charset="utf-8">
         <!--
         Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
@@ -55,6 +57,11 @@
         <button id='buttonNotificationAlert'>弹窗提示Alert</button>
         <button id='buttonNotificationConfirm'>弹窗提示Confirm</button>
         <button id='buttonNotificationPrompt'>弹窗提示Prompt</button>
+        <button id='buttonSwitchToSettings'>打开app设置</button>
+        <button id='buttonGetLocation'>获取定位</button>
+        <button id='buttonGetSerialLocation'>开启持续定位</button>
+        <button id='buttonStopSerialLocation'>关闭持续定位</button>
+        <button id='debugger' onclick='initAllPermissions'>debugger</button>
         <button
                 onclick="window.plugins.toast.showShortTop('Hello there!', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast
             showShortTop</button>
@@ -64,8 +71,7 @@
         <button
                 onclick="window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast
             show long center</button>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
+
     </body>
 
 </html>

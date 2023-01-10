@@ -1,0 +1,1 @@
+cordova plugin add cordova-plugin-gaodelocation-chenyu --variable  ANDROID_API_KEY=a8e6039ea8206a5fcef04a082c5ebb6d --variable  IOS_API_KEY=*

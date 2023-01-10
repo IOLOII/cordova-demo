@@ -19,7 +19,7 @@
 	<access origin="*" />
 	<platform name="android">
 		<allow-intent href="market:*" />
-		<preference name="LoadingDialog" value="Wait for it" />
+        <preference name="AndroidXEnabled" value="true" />
 		<config-file after="uses-permission" parent="/manifest" target="AndroidManifest.xml">
 			<!-- 高德猎鹰权限 start -->
 			<!-- 用于进行网络定位 -->
