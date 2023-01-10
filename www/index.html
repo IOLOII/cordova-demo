@@ -18,6 +18,7 @@
     under the License.
 -->
 <html>
+
     <head>
         <meta charset="utf-8">
         <!--
@@ -35,9 +36,10 @@
         <meta name="color-scheme" content="light dark">
         <link rel="stylesheet" href="css/index.css">
         <title>Hello World 123</title>
-        <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script> -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script>
         <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.2/axios.min.js"></script>
     </head>
+
     <body>
         <div class="app">
             <h1>Apache Cordova 123123</h1>
@@ -50,7 +52,20 @@
         <button id='buttonRequestPermission'>权限相机申请</button>
         <button id='buttonToCheckAllPermission'>校验危险权限</button>
         <button id='buttonToRequestAllPermission'>申请危险权限</button>
+        <button id='buttonNotificationAlert'>弹窗提示Alert</button>
+        <button id='buttonNotificationConfirm'>弹窗提示Confirm</button>
+        <button id='buttonNotificationPrompt'>弹窗提示Prompt</button>
+        <button
+                onclick="window.plugins.toast.showShortTop('Hello there!', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast
+            showShortTop</button>
+        <button
+                onclick="window.plugins.toast.showLongBottom('Hello there!', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast
+            showLongBottom</button>
+        <button
+                onclick="window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast
+            show long center</button>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
     </body>
+
 </html>

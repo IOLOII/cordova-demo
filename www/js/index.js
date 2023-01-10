@@ -21,9 +21,13 @@
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false)
 var permissions
+var notification
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-
+    console.log(navigator.notification)
+    if (navigator.notification) {
+        notification = navigator.notification
+    }
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version)
     document.getElementById('deviceready').classList.add('ready')
 
@@ -38,7 +42,7 @@ function onDeviceReady() {
     })
 }
 window.onload = function () {
-    // new VConsole
+    new VConsole
     console.log(axios)
     axios("http://express.web-framework-bk89.1676369102958317.cn-shenzhen.fc.devsapp.net/hello2").then((res) => {
         console.log(res)
@@ -50,11 +54,17 @@ window.onload = function () {
     var buttonRequestPermission = document.querySelector("#buttonRequestPermission")
     var buttonToCheckAllPermission = document.querySelector("#buttonToCheckAllPermission")
     var buttonToRequestAllPermission = document.querySelector("#buttonToRequestAllPermission")
+    var buttonNotificationAlert = document.querySelector("#buttonNotificationAlert")
+    var buttonNotificationConfirm = document.querySelector("#buttonNotificationConfirm")
+    var buttonNotificationPrompt = document.querySelector("#buttonNotificationPrompt")
 
     buttonCheckPermission.addEventListener('click', checkPermission)
     buttonRequestPermission.addEventListener('click', requestPermission)
     buttonToCheckAllPermission.addEventListener('click', toCheckAllPermission)
     buttonToRequestAllPermission.addEventListener('click', toRequestAllPermission)
+    buttonNotificationAlert.addEventListener('click', toNotificationAlert)
+    buttonNotificationConfirm.addEventListener('click', toNotificationConfirm)
+    buttonNotificationPrompt.addEventListener('click', toNotificationPrompt)
 }
 function checkPermission() {
     console.log("run checkPermission")
@@ -142,4 +152,38 @@ function toRequestAllPermission() {
         console.log("status:", status)
         if (!status.hasPermission) error()
     }
+}
+function toNotificationAlert() {
+    notification.beep(1);
+    notification.alert(
+        'You are the winner!',  // message
+        (buttonIndex) => {
+            alert('You selected button ' + buttonIndex)
+        },         // callback
+        'Game Over',            // title
+        'OK'                // buttonName
+    )
+}
+function toNotificationConfirm() {
+    notification.beep(1);
+    notification.confirm(
+        'You are the winner!',  // message
+        (buttonIndex) => {
+            alert('You selected button ' + buttonIndex)
+        },         // callback
+        'Game Over',            // title
+        ['OK', 'cancle', 'a']                // buttonName
+    )
+}
+function toNotificationPrompt() {
+    notification.beep(1);
+    notification.prompt(
+        'You are the winner!',  // message
+        (buttonIndex, input1) => {
+            alert('You selected button ' + buttonIndex + ' input1:' + input1)
+        },         // callback
+        'Game Over',            // title
+        ['OK', 'cancle', 'a']                // buttonName
+        , 'Jane Doe'
+    )
 }
