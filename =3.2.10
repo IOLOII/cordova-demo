@@ -1,0 +1,95 @@
+Running "cordova prepare" command:
+
+No scripts found for hook "before_prepare".
+Checking for saved platforms that haven't been added to the project
+Loaded API for android project D:\program\workspace\Other\cordova-codepush\permission-http-9\platforms\android\cordova\Api.js
+Checking for saved plugins that haven't been added to the project
+Generating platform-specific config.xml from defaults for android at D:\program\workspace\Other\cordova-codepush\permission-http-9\platforms\android\app\src\main\res\xml\config.xml
+Merging project's config.xml into platform-specific android config.xml
+[Gradle Properties] Preparing Configuration
+[Gradle Properties] Appending default configuration properties
+[Gradle Properties] Updating Gradle property "android.useAndroidX" with the value of "false"
+[Gradle Properties] Updating Gradle property "android.enableJetifier" with the value of "false"
+[Gradle Properties] Appending custom configuration properties
+[Gradle Properties] Detected Gradle property "android.useAndroidX" with the value of "true", Cordova's recommended value is "false"
+[Gradle Properties] Detected Gradle property "android.enableJetifier" with the value of "true", Cordova's recommended value is "false"
+[Gradle Properties] Updating and Saving File
+Merging and updating files from [www, platforms\android\platform_www] to platforms\android\app\src\main\assets\www
+  copy  platforms\android\platform_www\cordova-js-src\android\nativeapiprovider.js platforms\android\app\src\main\assets\www\cordova-js-src\android\nativeapiprovider.js (updated file)
+  copy  platforms\android\platform_www\cordova-js-src\android\promptbasednativeapi.js platforms\android\app\src\main\assets\www\cordova-js-src\android\promptbasednativeapi.js (updated file)
+  copy  platforms\android\platform_www\cordova-js-src\exec.js platforms\android\app\src\main\assets\www\cordova-js-src\exec.js (updated file)
+  copy  platforms\android\platform_www\cordova-js-src\platform.js platforms\android\app\src\main\assets\www\cordova-js-src\platform.js (updated file)
+  copy  platforms\android\platform_www\cordova-js-src\plugin\android\app.js platforms\android\app\src\main\assets\www\cordova-js-src\plugin\android\app.js (updated file)
+  copy  platforms\android\platform_www\cordova.js platforms\android\app\src\main\assets\www\cordova.js (updated file)
+  copy  platforms\android\platform_www\cordova_plugins.js platforms\android\app\src\main\assets\www\cordova_plugins.js (updated file)
+  copy  www\css\index.css platforms\android\app\src\main\assets\www\css\index.css (updated file)
+  copy  www\img\logo.png platforms\android\app\src\main\assets\www\img\logo.png (updated file)
+  copy  www\index.html platforms\android\app\src\main\assets\www\index.html (updated file)
+  copy  www\js\initNative.js platforms\android\app\src\main\assets\www\js\initNative.js (updated file)
+  copy  platforms\android\platform_www\plugins\code-push\script\acquisition-sdk.js platforms\android\app\src\main\assets\www\plugins\code-push\script\acquisition-sdk.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-android-permissions\www\permissions.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-android-permissions\www\permissions.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\codePush.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\codePush.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\codePushUtil.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\codePushUtil.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\fileUtil.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\fileUtil.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\httpRequester.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\httpRequester.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\installMode.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\installMode.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\localPackage.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\localPackage.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\nativeAppInfo.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\nativeAppInfo.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\package.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\package.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\remotePackage.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\remotePackage.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\sdk.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\sdk.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-code-push\bin\www\syncStatus.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-code-push\bin\www\syncStatus.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-device\www\device.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-device\www\device.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-dialogs\www\android\notification.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-dialogs\www\android\notification.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-dialogs\www\notification.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-dialogs\www\notification.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file-transfer\www\FileTransfer.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file-transfer\www\FileTransfer.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file-transfer\www\FileTransferError.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file-transfer\www\FileTransferError.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\DirectoryEntry.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\DirectoryEntry.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\DirectoryReader.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\DirectoryReader.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\Entry.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\Entry.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\File.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\File.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\FileEntry.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\FileEntry.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\FileError.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\FileError.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\FileReader.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\FileReader.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\FileSystem.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\FileSystem.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\FileUploadOptions.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\FileUploadOptions.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\FileUploadResult.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\FileUploadResult.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\FileWriter.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\FileWriter.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\Flags.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\Flags.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\LocalFileSystem.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\LocalFileSystem.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\Metadata.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\Metadata.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\ProgressEvent.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\ProgressEvent.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\android\FileSystem.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\android\FileSystem.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\browser\isChrome.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\browser\isChrome.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\fileSystemPaths.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\fileSystemPaths.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\fileSystems-roots.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\fileSystems-roots.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\fileSystems.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\fileSystems.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\requestFileSystem.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\requestFileSystem.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-gaodelocation-chenyu\www\GaoDeLocation.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-gaodelocation-chenyu\www\GaoDeLocation.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-progressdialog\www\plugins.XYDialog.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-progressdialog\www\plugins.XYDialog.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-x-toast\www\Toast.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-x-toast\www\Toast.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova-plugin-zip\zip.js platforms\android\app\src\main\assets\www\plugins\cordova-plugin-zip\zip.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.bluetooth.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.bluetooth.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.calendar.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.calendar.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.camera.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.camera.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.contacts.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.contacts.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.external_storage.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.external_storage.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.location.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.location.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.microphone.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.microphone.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.nfc.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.nfc.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.notifications.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.notifications.js (updated file)
+  copy  platforms\android\platform_www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.wifi.js platforms\android\app\src\main\assets\www\plugins\cordova.plugins.diagnostic\www\android\diagnostic.wifi.js (updated file)
+Wrote out android application name "HelloCordova" to D:\program\workspace\Other\cordova-codepush\permission-http-9\platforms\android\app\src\main\res\values\strings.xml
+android-versionCode not found in config.xml. Generating a code based on version in config.xml (3.2.11): 30211
+Wrote out Android package name "io.cordova.hellocordova" to D:/program/workspace/Other/cordova-codepush/permission-http-9/platforms/android/app/src/main/java/io/cordova/hellocordova/MainActivity.java
+This app does not have launcher icons defined
+This app does not have splash screens defined
+This app does not have additional resource files defined
+Prepared android project successfully
+No scripts found for hook "after_prepare".
+
+Releasing update contents to CodePush:
+
+

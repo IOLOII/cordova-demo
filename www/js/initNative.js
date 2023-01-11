@@ -5,7 +5,9 @@ window.$Native = {
     diagnostic: null,
     permissions: null,
     toast: null,
-    GaoDe: null
+    GaoDe: null,
+    progress: null,
+    CodePush: null
 }
 
 function onDeviceReady() {
@@ -14,12 +16,15 @@ function onDeviceReady() {
     document.getElementById('deviceready').classList.add('ready')
 
     $Native.notification = navigator.notification
+    $Native.toast = window.plugins.toast
+    $Native.toast.hide()
+    $Native.GaoDe = window.GaoDe
     $Native.permissions = cordova.plugins.permissions
     $Native.diagnostic = cordova.plugins.diagnostic
-    $Native.toast = window.plugins.toast
-    $Native.GaoDe = window.GaoDe
+    $Native.progress = cordova.plugin.progressDialog
 
     initAllPermissions()
+    checkUpdateApp()
 }
 window.onload = function () {
     new VConsole
@@ -42,6 +47,7 @@ window.onload = function () {
     var buttonGetSerialLocation = document.querySelector("#buttonGetSerialLocation")
     var buttonStopSerialLocation = document.querySelector("#buttonStopSerialLocation")
     var buttonDebugger = document.querySelector("#debugger")
+    var buttonCheckForUpdate = document.querySelector("#checkForUpdate")
 
     buttonCheckPermission.addEventListener('click', checkPermission)
     buttonRequestPermission.addEventListener('click', requestPermission)
@@ -55,6 +61,7 @@ window.onload = function () {
     buttonGetSerialLocation.addEventListener('click', getSerialLocation)
     buttonStopSerialLocation.addEventListener('click', stopSerialLocation)
     buttonDebugger.addEventListener('click', initAllPermissions)
+    buttonCheckForUpdate.addEventListener('click', checkUpdateApp)
 }
 function checkPermission() {
     console.log("run checkPermission")
@@ -299,5 +306,73 @@ function initAllPermissions() {
                 console.log(error)
                 console.warn('all permission is not turned on')
             })
+        })
+}
+function checkUpdateApp() {
+    codePush.sync(
+        function (status) {
+            switch (status) {
+                case SyncStatus.UP_TO_DATE:
+                    $Native.toast.showLongBottom('已经是最新版本')
+                    break
+                case SyncStatus.AWAITING_USER_ACTION:
+                    // 等待用户确认是否更新
+                    $Native.notification.beep(1)
+                    break
+                case SyncStatus.DOWNLOADING_PACKAGE:
+                    // 下载最新安装包
+                    $Native.progress.init({
+                        progressStyle: 'HORIZONTAL',
+                        title: '请稍等...',
+                        cancelable: false,
+                        message: '正在下载最新资源包...'
+                    })
+                    break
+                case SyncStatus.ERROR:
+                    $Native.progress.dismiss()
+                    $Native.toast.showLongBottom('下载失败，访问资源网络异常. 不用担心，下次启动软件会重新提示更新')
+                    break
+                case SyncStatus.INSTALLING_UPDATE:
+                    $Native.progress.dismiss()
+                    // 下载安装包完成，准备安装更新，请勿退出软件
+                    $Native.progress.init({
+                        // theme: 'HOLO_DARK',
+                        // progressStyle: 'HORIZONTAL',
+                        cancelable: false,
+                        title: '请稍等...',
+                        message: '准备安装更新，请勿退出软件 ...'
+                    })
+                    break
+                case SyncStatus.UPDATE_INSTALLED:
+                    $Native.progress.dismiss()
+                    $Native.toast.showShortBottom('安装成功,准备重启')
+                    break
+                case SyncStatus.UPDATE_IGNORED:
+                    $Native.progress.dismiss()
+                    $Native.toast.showLongBottom('您取消了更新，请下次点击确认更新，保证软件新功能能够服务到您')
+                    break
+            }
+        },
+        {
+            updateDialog: {
+                updateTitle: '发现有新的资源包',//用作向最终用户显示的更新通知的标头的文本。默认值为 。"Update available"
+                appendReleaseDescription: true,//指示是否要将可用版本的描述附加到向最终用户显示的通知消息中。默认值为 。false
+                descriptionPrefix: '更新内容：',//指示在向最终用户显示更新通知时，您希望在版本说明中加上前缀的字符串（如果有）。默认值为 。" Description: "
+                mandatoryContinueButtonLabel: '继续',//用于最终用户必须按下才能安装强制更新的按钮的文本。默认值为 。"Continue"
+                mandatoryUpdateMessage: '按继续以完成更新！',//将更新指定为必需时用作更新通知正文的文本。默认值为 。"An update is available that must be installed."
+                optionalUpdateMessage: '是否要下载更新？',//当更新是可选的时，用作更新通知正文的文本。默认值为 。"An update is available. Would you like to install it?"
+                optionalIgnoreButtonLabel: '忽略',
+                optionalInstallButtonLabel: '立即更新',
+            },
+            installMode: 'InstallMode.ON_NEXT_RESTART'
+        }, downloadProgress => {
+            if (downloadProgress) {
+                console.log('Downloading ' + downloadProgress.receivedBytes + ' of ' + downloadProgress.totalBytes)
+                $Native.progress.setProgress(
+                    ((point) => {
+                        return parseInt(Number(point * 100).toFixed(2))
+                    })(downloadProgress.receivedBytes / downloadProgress.totalBytes)
+                )
+            }
         })
 }

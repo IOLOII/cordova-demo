@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="io.cordova.hellocordova" version="3.2.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	<name>
 		HelloCordova
 	</name>
@@ -19,7 +19,9 @@
 	<access origin="*" />
 	<platform name="android">
 		<allow-intent href="market:*" />
-        <preference name="AndroidXEnabled" value="true" />
+		<preference name="CodePushDeploymentKey" value="ifwE6nq83JF7AwwwIjMOnF8ZKmUz4ksvOXqoQ" />
+		<preference name="CodePushServerUrl" value="http://39.104.101.201:3000" />
+		<preference name="AndroidXEnabled" value="true" />
 		<config-file after="uses-permission" parent="/manifest" target="AndroidManifest.xml">
 			<!-- 高德猎鹰权限 start -->
 			<!-- 用于进行网络定位 -->
