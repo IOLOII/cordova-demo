@@ -3,11 +3,11 @@ window.$Native = {
     notification: null,
     permissions: null,
     diagnostic: null,
-    permissions: null,
     toast: null,
     GaoDe: null,
     progress: null,
-    CodePush: null
+    CodePush: null,
+    // AmapTrackPlugin: null
 }
 
 function onDeviceReady() {
@@ -19,6 +19,7 @@ function onDeviceReady() {
     $Native.toast = window.plugins.toast
     $Native.toast.hide()
     $Native.GaoDe = window.GaoDe
+    // $Native.AmapTrackPlugin = cordova.plugins.AmapTrackPlugin
     $Native.permissions = cordova.plugins.permissions
     $Native.diagnostic = cordova.plugins.diagnostic
     $Native.progress = cordova.plugin.progressDialog
@@ -62,6 +63,27 @@ window.onload = function () {
     buttonStopSerialLocation.addEventListener('click', stopSerialLocation)
     buttonDebugger.addEventListener('click', initAllPermissions)
     buttonCheckForUpdate.addEventListener('click', checkUpdateApp)
+
+
+    let buttton2 = document.querySelector("#button2")
+    buttton2.addEventListener("click", () => {
+        // startTrack().then().catch((e) => {
+        //     console.log(e)
+        // })
+    })
+
+    let button3 = document.querySelector("#button3")
+    button3.addEventListener("click", () => {
+        // stopTrack().then().catch((e) => {
+        //     console.log(e)
+        // })
+    })
+    let button4 = document.querySelector("#button4")
+    button4.addEventListener("click", () => {
+        // queryDistance().then().catch((e) => {
+        //     console.log(e)
+        // })
+    })
 }
 function checkPermission() {
     console.log("run checkPermission")
@@ -248,7 +270,8 @@ function initAllPermissions() {
         $Native.permissions.ACCESS_COARSE_LOCATION,
         $Native.permissions.ACCESS_FINE_LOCATION,
         $Native.permissions.READ_PHONE_STATE,
-        $Native.permissions.WRITE_EXTERNAL_STORAGE
+        $Native.permissions.WRITE_EXTERNAL_STORAGE,
+        $Native.permissions.READ_EXTERNAL_STORAGE,
     ]
     let psall = []
     allNeedCheckPermission.forEach(per => {
@@ -283,6 +306,7 @@ function initAllPermissions() {
             })
 
             // 校验必要权限
+            const tips = '请授权访问此设备的'
             var locationPermission = [
                 $Native.permissions.ACCESS_COARSE_LOCATION,
                 $Native.permissions.ACCESS_FINE_LOCATION,
@@ -290,9 +314,33 @@ function initAllPermissions() {
             $Native.permissions.requestPermissions(locationPermission, status => {
                 console.log("status:", status)
                 if (!status.hasPermission) {
-                    $Native.toast.showLongBottom('请授权定位权限')
+                    $Native.toast.showLongBottom('请授权位置信息权限')
                     $Native.notification.confirm(
-                        '请允许数字公路访问您的位置',  // message
+                        tips+'位置信息权限',  // message
+                        (buttonIndex) => {
+                            if (buttonIndex == 1) {
+                                $Native.diagnostic.switchToSettings()
+                            }
+                        }, // callback
+                        '', // title
+                        ['去设置', '暂不开启'] // buttonName
+                    )
+                }
+            }, error => {
+                console.log(error)
+                console.warn('all permission is not turned on')
+            })
+
+            var storagePermission = [
+                $Native.permissions.WRITE_EXTERNAL_STORAGE,
+                $Native.permissions.READ_EXTERNAL_STORAGE,
+            ]
+            $Native.permissions.requestPermissions(storagePermission, status => {
+                console.log("status:", status)
+                if (!status.hasPermission) {
+                    $Native.toast.showLongBottom('请授权媒体存储权限')
+                    $Native.notification.confirm(
+                        tips+'媒体存储权限',  // message
                         (buttonIndex) => {
                             if (buttonIndex == 1) {
                                 $Native.diagnostic.switchToSettings()
@@ -375,4 +423,59 @@ function checkUpdateApp() {
                 )
             }
         })
+}
+
+/**
+ * 开始轨迹上报
+ * @param {number} sid 服务id
+ * @param {string} terminalId 用户终端的唯一标识比如phone
+ */
+function startTrack(sid = 868198, terminalId = "13570274429") {
+    return new Promise((resolve, reject) => {
+        $Native.AmapTrackPlugin.startTrack(sid, terminalId, false, function (tid) {
+            // tid 获取到该sid下的该用户的终端id
+            console.log("服务已启动成功,tid：", tid)
+            $Native.toast.showShortBottom('定位采集服务已启动')
+            resolve(tid)
+        }, err => {
+            console.log("服务启动失败，是否再次尝试？")
+            reject(err)
+        })
+    })
+}
+// 停止轨迹上报
+function stopTrack() {
+    return new Promise((resolve, reject) => {
+        $Native.AmapTrackPlugin.stopTrack(data => {
+            console.log("服务已停止,data:", data)
+            $Native.toast.showShortBottom('已停止定位采集')
+            resolve(data)
+        }, err => {
+            reject(err)
+        })
+    })
+}
+// 获取行动轨迹距离
+/**
+ *
+ * @param {number} sid 服务id
+ * @param {number | string} terminalId 用户终端的唯一标识比如phone
+ * @param {date} startTime 时间戳
+ * @param {date} endTime 时间戳
+ * @returns
+ */
+function queryDistance(sid = 868198, terminalId = 13570274429, startTime = 1673503772000, endTime = 1673503855000) {
+    console.log(sid, terminalId, startTime, endTime)
+    // if (!endTime) {
+    endTime = (new Date()).getTime()
+    // }
+    return new Promise((resolve, reject) => {
+        $Native.AmapTrackPlugin.queryDistance(sid, terminalId, startTime, endTime, data => {
+            console.log("距离查询,data:", data)
+            $Native.toast.showLongBottom(`距离查询：${data}`)
+            resolve(data)
+        }, err => {
+            reject(err)
+        })
+    })
 }
