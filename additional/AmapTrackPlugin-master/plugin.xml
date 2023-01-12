@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.plugin.wly.amaptrack" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>AmapTrackPlugin</name>
+    <js-module name="AmapTrackPlugin" src="www/AmapTrackPlugin.js">
+        <clobbers target="cordova.plugins.AmapTrackPlugin" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="AmapTrackPlugin"><param name="android-package" value="com.plugin.wly.amaptrack.AmapTrackPlugin" /></feature>
+        </config-file>
+        <!-- 权限代码也可以添加在此处 -->        
+        <lib-file src="src/android/AMapTrack_1.1.0_AMapLocation_4.5.0_20190227.jar" />
+        <source-file src="src/android/util/SimpleOnTrackLifecycleListener.java" target-dir="src/com/plugin/wly/amaptrack/AmapTrackPlugin" />
+        <source-file src="src/android/util/SimpleOnTrackListener.java" target-dir="src/com/plugin/wly/amaptrack/AmapTrackPlugin" />
+        <source-file src="src/android/AmapTrackPlugin.java" target-dir="src/com/plugin/wly/amaptrack/AmapTrackPlugin" />
+    </platform>
+</plugin>
