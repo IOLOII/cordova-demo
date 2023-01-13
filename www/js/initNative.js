@@ -6,8 +6,8 @@ window.$Native = {
   toast: null,
   GaoDe: null,
   progress: null,
-  CodePush: null,
-  // AmapTrackPlugin: null
+  codePush: null,
+  // AmapTrackPlugin: null // 不建议使用猎鹰功能 => app开启持续定位 传递定位结果给后端去创建猎鹰轨迹
   checkPermission: () => {
     console.error("权限校验未初始化,请待初始化后校验")
     alert("权限校验未初始化")
@@ -16,7 +16,8 @@ window.$Native = {
      * 如需要上面类型的授权 建议 加在initAllPermissions方法中
      * 或者基于 $Native.permissions 重新编写
      *  */
-  }
+  },
+  checkUpdateApp:checkUpdateApp
 }
 
 function onDeviceReady() {
@@ -26,7 +27,7 @@ function onDeviceReady() {
   $Native.toast = window.plugins.toast
   $Native.toast.hide()
   $Native.GaoDe = window.GaoDe
-  // $Native.AmapTrackPlugin = cordova.plugins.AmapTrackPlugin
+  $Native.codePush = window.codePush
   $Native.permissions = cordova.plugins.permissions
   $Native.diagnostic = cordova.plugins.diagnostic
   $Native.progress = cordova.plugin.progressDialog
@@ -36,6 +37,7 @@ function onDeviceReady() {
 }
 window.onload = function () {
   new VConsole
+  return
   console.log(axios)
   axios("http://express.web-framework-bk89.1676369102958317.cn-shenzhen.fc.devsapp.net/hello2").then((res) => {
     console.log(res)
@@ -351,31 +353,31 @@ function initAllPermissions() {
       })
       $Native.checkPermission = () => {
         // return new Promise((resolve,reject) => {
-          // todoTurnonPermissions 校验必要权限
-          let tips = `请授权访问此设备的${todoTurnonPermissions.map(item => item.group).join("，")}权限`
-          todoTurnonPermissions.forEach(item => { // 实际只会第一个正常提示，在设置完一个权限后，app会被重启
-            $Native.permissions.requestPermissions(item.permissions, status => {
-              if (!status.hasPermission) {
-                $Native.toast.showLongBottom(tips)
-                $Native.notification.confirm(
-                  tips,  // message
-                  (buttonIndex) => {
-                    if (buttonIndex == 1) {
-                      $Native.diagnostic.switchToSettings()
-                      // TODO:
-                    }
-                    if (buttonIndex == 2) {
-                      // TODO:
-                    }
-                  }, // callback
-                  '', // title
-                  ['去设置', '暂不开启'] // buttonName
-                )
-              }
-            }, error => {
-              console.warn('todoTurnonPermissions is not turned on')
-            })
+        // todoTurnonPermissions 校验必要权限
+        let tips = `请授权访问此设备的${todoTurnonPermissions.map(item => item.group).join("，")}权限`
+        todoTurnonPermissions.forEach(item => { // 实际只会第一个正常提示，在设置完一个权限后，app会被重启
+          $Native.permissions.requestPermissions(item.permissions, status => {
+            if (!status.hasPermission) {
+              $Native.toast.showLongBottom(tips)
+              $Native.notification.confirm(
+                tips,  // message
+                (buttonIndex) => {
+                  if (buttonIndex == 1) {
+                    $Native.diagnostic.switchToSettings()
+                    // TODO:
+                  }
+                  if (buttonIndex == 2) {
+                    // TODO:
+                  }
+                }, // callback
+                '', // title
+                ['去设置', '暂不开启'] // buttonName
+              )
+            }
+          }, error => {
+            console.warn('todoTurnonPermissions is not turned on')
           })
+        })
         // })
       }
       $Native.checkPermission.todoTurnonPermissions = todoTurnonPermissions
@@ -387,7 +389,7 @@ function initAllPermissions() {
     })
 }
 function checkUpdateApp() {
-  codePush.sync(
+  $Native.codePush.sync(
     status => {
       switch (status) {
         case SyncStatus.UP_TO_DATE:
@@ -407,11 +409,11 @@ function checkUpdateApp() {
           })
           break
         case SyncStatus.ERROR:
-          $Native.progress.dismiss()
+          if ($Native.progress.$hasInit) $Native.progress.dismiss()
           $Native.toast.showLongBottom('下载失败，访问资源网络异常. 不用担心，下次启动软件会重新提示更新')
           break
         case SyncStatus.INSTALLING_UPDATE:
-          $Native.progress.dismiss()
+          if ($Native.progress.$hasInit) $Native.progress.dismiss()
           // 下载安装包完成，准备安装更新，请勿退出软件
           $Native.progress.init({
             // theme: 'HOLO_DARK',
@@ -420,13 +422,14 @@ function checkUpdateApp() {
             title: '请稍等...',
             message: '准备安装更新，请勿退出软件 ...'
           })
+          $Native.progress.$hasInit = true
           break
         case SyncStatus.UPDATE_INSTALLED:
-          $Native.progress.dismiss()
+          if ($Native.progress.$hasInit) $Native.progress.dismiss()
           $Native.toast.showShortBottom('安装成功,准备重启')
           break
         case SyncStatus.UPDATE_IGNORED:
-          $Native.progress.dismiss()
+          if ($Native.progress.$hasInit) $Native.progress.dismiss()
           $Native.toast.showLongBottom('您取消了更新，请下次点击确认更新，保证软件新功能能够服务到您')
           break
       }
