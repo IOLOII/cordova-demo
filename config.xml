@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="io.cordova.hellocordova" version="3.2.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	<name>
-		HelloCordova
+		数字公路
 	</name>
 	<description>
 		Sample Apache Cordova App
@@ -19,7 +19,7 @@
 	<access origin="*" />
 	<platform name="android">
 		<allow-intent href="market:*" />
-		<preference name="CodePushDeploymentKey" value="ifwE6nq83JF7AwwwIjMOnF8ZKmUz4ksvOXqoQ" />
+		<preference name="CodePushDeploymentKey" value="iEtFO69ljpTjmeQXbI8OfbQq0HF54ksvOXqoQ" />
 		<preference name="CodePushServerUrl" value="http://39.104.101.201:3000" />
 		<preference name="AndroidXEnabled" value="true" />
 		<config-file after="uses-permission" parent="/manifest" target="AndroidManifest.xml">
@@ -63,5 +63,6 @@
 				<param name="android-package" value="nl.xservices.plugins.Toast" />
 			</feature>
 		</config-file>
+		<icon density="mdpi" height="57" platform="android" src="res/icon/logo.png" width="57" />
 	</platform>
 </widget>
